@@ -1,9 +1,9 @@
 syntax = "proto3";
-package game;
 
-option go_package = "github.com/a135422996/go-service-pb/gozero_gen/game";
+package gorpc;
+option go_package = "github.com/a135422996/go-service-pb/client;gorpc";
 
-import "common.proto";
+import "pb/gorpc/common.proto";
 
 message GameVo {
   int64 id = 1;
@@ -17,7 +17,7 @@ message GameVo {
 
 message GameReq { GameVo vo = 1; }
 message GameListReq {
-  common.Page page = 1;
+  Page page = 1;
   repeated string pkgs = 2;
   GameVo vo = 3;
 }
@@ -37,7 +37,7 @@ message RelGameRankVo {
 
 message RelGameRankReq { RelGameRankVo vo = 1; }
 message RelGameRankListReq {
-  common.Page page = 1;
+  Page page = 1;
   RelGameRankVo vo = 2;
 }
 message RelGameRankListRes {
@@ -57,7 +57,7 @@ message RelGameVpnGroupVo {
 
 message RelGameVpnGroupReq { RelGameVpnGroupVo vo = 1; }
 message RelGameVpnGroupListReq {
-  common.Page page = 1;
+  Page page = 1;
   repeated int64 gameIds = 2;
   RelGameVpnGroupVo vo = 3;
 }
@@ -69,23 +69,23 @@ message RelGameVpnGroupListRes {
 service GoGameClient {
   // 加速器游戏管理
   rpc GameAdd(GameVo) returns (GameVo);
-  rpc GameUpdate(GameVo) returns (common.Empty);
-  rpc GameDel(common.Ids) returns (common.Empty);
+  rpc GameUpdate(GameVo) returns (Empty);
+  rpc GameDel(Ids) returns (Empty);
   rpc GameGet(GameReq) returns (GameVo);
   rpc GameList(GameListReq) returns (GameListRes);
-  rpc GameAll(common.Request) returns (GameListRes);
+  rpc GameAll(Request) returns (GameListRes);
 
   // 游戏榜单关联关系
   rpc RelGameRankAdd(RelGameRankVo) returns (RelGameRankVo);
-  rpc RelGameRankUpdate(RelGameRankVo) returns (common.Empty);
-  rpc RelGameRankDel(common.Ids) returns (common.Empty);
+  rpc RelGameRankUpdate(RelGameRankVo) returns (Empty);
+  rpc RelGameRankDel(Ids) returns (Empty);
   rpc RelGameRankGet(RelGameRankReq) returns (RelGameRankVo);
   rpc RelGameRankList(RelGameRankListReq) returns (RelGameRankListRes);
 
   // 游戏地域关联关系
   rpc RelGameVpnGroupAdd(RelGameVpnGroupVo) returns (RelGameVpnGroupVo);
-  rpc RelGameVpnGroupUpdate(RelGameVpnGroupVo) returns (common.Empty);
-  rpc RelGameVpnGroupDel(common.Ids) returns (common.Empty);
+  rpc RelGameVpnGroupUpdate(RelGameVpnGroupVo) returns (Empty);
+  rpc RelGameVpnGroupDel(Ids) returns (Empty);
   rpc RelGameVpnGroupGet(RelGameVpnGroupReq) returns (RelGameVpnGroupVo);
   rpc RelGameVpnGroupList(RelGameVpnGroupListReq)
       returns (RelGameVpnGroupListRes);

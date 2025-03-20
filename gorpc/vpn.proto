@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package vpn;
-option go_package = "github.com/a135422996/go-service-pb/gozero_gen/vpn";
+package gorpc;
+option go_package = "github.com/a135422996/go-service-pb/client;gorpc";
 
-import "common.proto";
+import "pb/gorpc/common.proto";
 
 // VpnTag 相关消息定义
 message VpnTagVo {
@@ -12,7 +12,7 @@ message VpnTagVo {
   string type = 3;
   string name = 4;
   int64 sort = 5;
-  common.Status status = 6;
+  Status status = 6;
   string remark = 7;
   int64 createTime = 8;
   int64 updateTime = 9;
@@ -21,7 +21,7 @@ message VpnTagVo {
 message VpnTagGetReq { VpnTagVo vo = 1; }
 
 message VpnTagListReq {
-  common.Page page = 1;
+  Page page = 1;
   VpnTagVo vo = 2;
 }
 
@@ -36,7 +36,7 @@ message VpnGroupVo {
   string name = 3;
   string icon = 4;
   int64 sort = 5;
-  common.Status status = 6;
+  Status status = 6;
   string remark = 7;
   int64 createTime = 8;
   int64 updateTime = 9;
@@ -48,7 +48,7 @@ message VpnGroupAddReq {
 }
 message VpnGroupGetReq { VpnGroupVo vo = 1; }
 message VpnGroupListReq {
-  common.Page page = 1;
+  Page page = 1;
   VpnGroupVo vo = 2;
 }
 message VpnGroupListResp {
@@ -65,7 +65,7 @@ message VpnGroupTagVo {
 }
 
 message VpnGroupTagListReq {
-  common.Page page = 1;
+  Page page = 1;
   VpnGroupTagVo vo = 2;
   repeated int64 groupIds = 3;
   repeated int64 tagIds = 4;
@@ -86,7 +86,7 @@ message VpnLocationVo {
   string displayPolicyConfig = 7;
   string routePolicyConfig = 8;
   int64 sort = 9;
-  common.Status status = 10;
+  Status status = 10;
   string remark = 11;
   int64 createTime = 12;
   int64 updateTime = 13;
@@ -100,7 +100,7 @@ message VpnLocationExVo {
 
 message VpnLocationGetReq { VpnLocationVo vo = 1; }
 message VpnLocationListReq {
-  common.Page page = 1;
+  Page page = 1;
   VpnLocationExVo vo = 2;
   repeated int64 groupIds = 3;
 }
@@ -119,7 +119,7 @@ message VpnServerVo {
   string netConfig = 7;
   string routePolicyConfig = 8;
   string serverInfo = 9;
-  common.Status status = 10;
+  Status status = 10;
   string remark = 11;
   int64 createTime = 12;
   int64 updateTime = 13;
@@ -127,7 +127,7 @@ message VpnServerVo {
 }
 
 message VpnServerListReq {
-  common.Page page = 1;
+  Page page = 1;
   VpnServerVo vo = 2;
   string productCode = 3;
   // repeated int64 serverIds = 4; //只有统计使用,findList没有用到
@@ -150,11 +150,11 @@ message VpnServerLocationVo {
   int64 locationId = 3;
   int64 createTime = 4;
   int64 updateTime = 5;
-  common.Status status = 6;
+  Status status = 6;
 }
 
 message VpnServerLocationListReq {
-  common.Page page = 1;
+  Page page = 1;
   VpnServerLocationVo vo = 2;
   repeated int64 serverIds = 3;
   repeated int64 locationIds = 4;
@@ -171,8 +171,8 @@ message VpnLocationServerCountVo {
 }
 
 message VpnLocationServerCountReq {
-  common.Page page = 1;
-  common.Status status = 2;
+  Page page = 1;
+  Status status = 2;
   repeated int64 serverIds = 3;
   repeated int64 locationIds = 4;
 }
@@ -184,49 +184,49 @@ message VpnLocationServerCountResp {
 
 // govpn 模块，VPN相关服务
 service GoVpnClient {
-  rpc Ping(common.Request) returns (common.Response);
+  rpc Ping(Request) returns (Response);
   // 表的事务操作
-  rpc Transaction(common.TransactionReq) returns (common.Empty);
+  rpc Transaction(TransactionReq) returns (Empty);
 
   // VpnTag
   rpc VpnTagAdd(VpnTagVo) returns (VpnTagVo);
-  rpc VpnTagUpdate(VpnTagVo) returns (common.Empty);
-  rpc VpnTagDel(common.Ids) returns (common.Empty);
+  rpc VpnTagUpdate(VpnTagVo) returns (Empty);
+  rpc VpnTagDel(Ids) returns (Empty);
   rpc VpnTagGet(VpnTagGetReq) returns (VpnTagVo);
   rpc VpnTagList(VpnTagListReq) returns (VpnTagListResp);
 
   // VpnGroup
   rpc VpnGroupAdd(VpnGroupAddReq) returns (VpnGroupVo);
-  rpc VpnGroupUpdate(VpnGroupAddReq) returns (common.Empty);
-  rpc VpnGroupDel(common.Ids) returns (common.Empty);
+  rpc VpnGroupUpdate(VpnGroupAddReq) returns (Empty);
+  rpc VpnGroupDel(Ids) returns (Empty);
   // rpc VpnGroupGet(VpnGroupGetReq) returns (VpnGroupVo);
   rpc VpnGroupList(VpnGroupListReq) returns (VpnGroupListResp);
 
   // VpnGroupTag
   rpc VpnGroupTagAdd(VpnGroupTagVo) returns (VpnGroupTagVo);
-  rpc VpnGroupTagUpdate(VpnGroupTagVo) returns (common.Empty);
-  rpc VpnGroupTagDel(common.Ids) returns (common.Empty);
+  rpc VpnGroupTagUpdate(VpnGroupTagVo) returns (Empty);
+  rpc VpnGroupTagDel(Ids) returns (Empty);
   rpc VpnGroupTagGet(VpnGroupTagVo) returns (VpnGroupTagVo);
   rpc VpnGroupTagList(VpnGroupTagListReq) returns (VpnGroupTagListResp);
 
   // VpnLocation
   rpc VpnLocationAdd(VpnLocationVo) returns (VpnLocationVo);
-  rpc VpnLocationUpdate(VpnLocationVo) returns (common.Empty);
-  rpc VpnLocationDel(common.Ids) returns (common.Empty);
+  rpc VpnLocationUpdate(VpnLocationVo) returns (Empty);
+  rpc VpnLocationDel(Ids) returns (Empty);
   rpc VpnLocationGet(VpnLocationGetReq) returns (VpnLocationVo);
   rpc VpnLocationList(VpnLocationListReq) returns (VpnLocationListResp);
 
   // VpnServer
   rpc VpnServerAdd(VpnServerAddReq) returns (VpnServerVo);
-  rpc VpnServerUpdate(VpnServerAddReq) returns (common.Empty);
-  rpc VpnServerDel(common.Ids) returns (common.Empty);
+  rpc VpnServerUpdate(VpnServerAddReq) returns (Empty);
+  rpc VpnServerDel(Ids) returns (Empty);
   rpc VpnServerGet(VpnServerVo) returns (VpnServerVo);
   rpc VpnServerList(VpnServerListReq) returns (VpnServerListResp);
 
   // VpnServerLocation
   rpc VpnServerLocationAdd(VpnServerLocationVo) returns (VpnServerLocationVo);
-  rpc VpnServerLocationUpdate(VpnServerLocationVo) returns (common.Empty);
-  rpc VpnServerLocationDel(common.Ids) returns (common.Empty);
+  rpc VpnServerLocationUpdate(VpnServerLocationVo) returns (Empty);
+  rpc VpnServerLocationDel(Ids) returns (Empty);
   rpc VpnServerLocationGet(VpnServerLocationVo) returns (VpnServerLocationVo);
   rpc VpnServerLocationList(VpnServerLocationListReq)
       returns (VpnServerLocationListResp);

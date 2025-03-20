@@ -5,15 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d329177-eb19-4c58-8ece-278961324584" name="更改" comment="feat:私仓">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/generate_client.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proto/common.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proto/game.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proto/merge.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proto/pmp.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proto/sys.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proto/user.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/proto/vpn.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gorpc/bean.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gorpc/constant.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gorpc/gorpc.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gorpc/gorpc.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gorpc/merge.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate_client.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gozero_gen/common/common.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gozero_gen/game/game.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gozero_gen/game/game_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gozero_gen/pmp/pmp.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gozero_gen/pmp/pmp_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gozero_gen/sys/sys.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gozero_gen/sys/sys_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gozero_gen/user/user.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gozero_gen/user/user_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gozero_gen/vpn/vpn.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gozero_gen/vpn/vpn_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/common.proto" beforeDir="false" afterPath="$PROJECT_DIR$/gorpc/common.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/game.proto" beforeDir="false" afterPath="$PROJECT_DIR$/gorpc/game.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/pmp.proto" beforeDir="false" afterPath="$PROJECT_DIR$/gorpc/pmp.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/sys.proto" beforeDir="false" afterPath="$PROJECT_DIR$/gorpc/sys.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/user.proto" beforeDir="false" afterPath="$PROJECT_DIR$/gorpc/user.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/vpn.proto" beforeDir="false" afterPath="$PROJECT_DIR$/gorpc/vpn.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +79,7 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/proto" />
     </key>
   </component>
   <component name="SharedIndexes">

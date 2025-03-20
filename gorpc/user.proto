@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package user;
-option go_package = "github.com/a135422996/go-service-pb/gozero_gen/user";
+package gorpc;
+option go_package = "github.com/a135422996/go-service-pb/client;gorpc";
 
-import "common.proto";
+import "pb/gorpc/common.proto";
 
 // Account
 message AccountVo {
@@ -14,13 +14,13 @@ message AccountVo {
   string password = 5;        // 密码
   string accountKey = 6;      // 账号KEY
   string accountPassword = 7; // 账号密码
-  common.BoolInt whitelistUser = 8;  // 白名单用户
+  BoolInt whitelistUser = 8;  // 白名单用户
   string area = 9;            // 指定地区
   int64 accountType = 10;     // 账号类型
   int64 registMode = 11;      // 注册方式
-  common.BoolInt activated = 12;     // 是否激活
+  BoolInt activated = 12;     // 是否激活
   string config = 13;         // 配置
-  common.Status status = 14;         // 状态
+  Status status = 14;         // 状态
   string remark = 15;         // 备注
   string deviceId = 16;       // 设备ID
   string platform = 17;       // 平台
@@ -43,7 +43,7 @@ message AccountVo {
 }
 
 message AccountListReq {
-  common.Page page = 1;
+  Page page = 1;
   AccountVo vo = 2;
 }
 
@@ -64,7 +64,7 @@ message AccountDeviceVo {
 }
 
 message AccountDeviceListReq {
-  common.Page page = 1;
+  Page page = 1;
   AccountDeviceVo vo = 2;
 }
 
@@ -98,7 +98,7 @@ message DeviceVo {
 }
 
 message DeviceListReq {
-  common.Page page = 1;
+  Page page = 1;
   DeviceVo vo = 2;
 }
 message DeviceListRes {
@@ -111,13 +111,13 @@ message UserAppConfigVo {
   string deviceId = 2;
   string key = 3;
   string value = 4;
-  common.Status status = 5;
+  Status status = 5;
   int64 createTime = 6;
   int64 updateTime = 7;
 }
 message UserAppConfigGetReq { UserAppConfigVo vo = 1; }
 message UserAppConfigListReq {
-  common.Page page = 1;
+  Page page = 1;
   UserAppConfigVo vo = 2;
 }
 message UserAppConfigListRes {
@@ -127,35 +127,35 @@ message UserAppConfigListRes {
 
 // 用户模块
 service GoUserClient {
-  rpc Ping(common.Request) returns (common.Response);
+  rpc Ping(Request) returns (Response);
   // 登录
-  rpc Login(common.BaseReq) returns (common.Response);
+  rpc Login(BaseReq) returns (Response);
 
   // 用户app配置管理（ring）
   rpc UserAppConfigAdd(UserAppConfigVo) returns (UserAppConfigVo);
   rpc UserAppConfigUpdate(UserAppConfigVo) returns (UserAppConfigVo);
-  rpc UserAppConfigDel(common.Ids) returns (common.Empty);
+  rpc UserAppConfigDel(Ids) returns (Empty);
   rpc UserAppConfigGet(UserAppConfigGetReq) returns (UserAppConfigVo);
   rpc UserAppConfigList(UserAppConfigListReq) returns (UserAppConfigListRes);
 
   // 设备管理
   rpc DeviceAdd(DeviceVo) returns (DeviceVo);
   rpc DeviceUpdate(DeviceVo) returns (DeviceVo);
-  rpc DeviceDel(common.Ids) returns (common.Empty);
+  rpc DeviceDel(Ids) returns (Empty);
   rpc DeviceGet(DeviceVo) returns (DeviceVo);
   rpc DeviceList(DeviceListReq) returns (DeviceListRes);
 
   // Account
   rpc AccountAdd(AccountVo) returns (AccountVo);
   rpc AccountUpdate(AccountVo) returns (AccountVo);
-  rpc AccountDel(common.Ids) returns (common.Empty);
+  rpc AccountDel(Ids) returns (Empty);
   rpc AccountGet(AccountVo) returns (AccountVo);
   rpc AccountList(AccountListReq) returns (AccountListResp);
 
   // AccountDevice
   rpc AccountDeviceAdd(AccountDeviceVo) returns (AccountDeviceVo);
   rpc AccountDeviceUpdate(AccountDeviceVo) returns (AccountDeviceVo);
-  rpc AccountDeviceDel(common.Ids) returns (common.Empty);
+  rpc AccountDeviceDel(Ids) returns (Empty);
   rpc AccountDeviceGet(AccountDeviceVo) returns (AccountDeviceVo);
   rpc AccountDeviceList(AccountDeviceListReq) returns (AccountDeviceListResp);
 }

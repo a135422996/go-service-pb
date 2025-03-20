@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package pmp;
-option go_package = "github.com/a135422996/go-service-pb/gozero_gen/pmp";
+package gorpc;
+option go_package = "github.com/a135422996/go-service-pb/client;gorpc";
 
-import "common.proto";
+import "pb/gorpc/common.proto";
 
 message I18nVo {
   string code = 1;
@@ -22,7 +22,7 @@ message UpgradeResVo {
   int64 runtimeVersionCode = 9;
   string appVersionName = 10;
   int64 appVersionCode = 11;
-  common.Status status = 12;
+  Status status = 12;
   string remark = 13;
   int64 createTime = 14;
   int64 updateTime = 15;
@@ -43,7 +43,7 @@ message UpgradeResConfigVo {
   int64 upgradeRate = 11;
   string intro = 12;
   string apis = 13;
-  common.Status status = 14;
+  Status status = 14;
   string remark = 15;
   string userIds = 16;
   int64 createTime = 17;
@@ -75,7 +75,7 @@ message UpgradePkgVo {
   int64 isForceUpdate = 17;
   string forceIntro = 18;
   string forceVersionConfigs = 19;
-  common.Status status = 20;
+  Status status = 20;
   string remark = 21;
   int64 createTime = 22;
   int64 updateTime = 23;
@@ -84,12 +84,12 @@ message UpgradePkgVo {
 }
 
 message UpgradeResConfigGetReq {
-  common.Page page = 1;
+  Page page = 1;
   int64 id = 2;
 }
 
 message UpgradeResConfigListReq {
-  common.Page page = 1;
+  Page page = 1;
   UpgradeResConfigVo vo = 2;
 }
 
@@ -101,7 +101,7 @@ message UpgradeResConfigListResp {
 message UpgradePkgGetReq { UpgradePkgVo vo = 1; }
 
 message UpgradePkgListReq {
-  common.Page page = 1;
+  Page page = 1;
   UpgradePkgVo vo = 2;
 }
 
@@ -113,7 +113,7 @@ message UpgradePkgListResp {
 message UpgradeResGetReq { UpgradeResVo vo = 1; }
 
 message UpgradeResListReq {
-  common.Page page = 1;
+  Page page = 1;
   UpgradeResVo vo = 2;
 }
 message UpgradeResListResp {
@@ -140,20 +140,20 @@ message GlobalParamVo {
   float minValue = 5;
   float maxValue = 6;
   string name = 7;
-  common.BoolInt editable = 8;
-  common.BoolInt nullable = 9;
-  common.BoolInt hidden = 10;
-  common.BoolInt mutiLang = 11;
+  BoolInt editable = 8;
+  BoolInt nullable = 9;
+  BoolInt hidden = 10;
+  BoolInt mutiLang = 11;
   int64 sort = 12;
   string remark = 13;
-  common.BoolInt apiExport = 14;
+  BoolInt apiExport = 14;
   string apiExportName = 15;
   int64 createTime = 16;
   int64 updateTime = 17;
 }
 
 message GlobalParamListReq {
-  common.Page page = 1;
+  Page page = 1;
   GlobalParamVo vo = 2;
 };
 
@@ -169,7 +169,7 @@ message ProductVo {
   string code = 2;
   string name = 3;
   string domain = 4;
-  common.Status status = 5;
+  Status status = 5;
   string langs = 6;
   string defaultLang = 7;
   string remark = 8;
@@ -178,7 +178,7 @@ message ProductVo {
 }
 
 message ProductListReq {
-  common.Page page = 1;
+  Page page = 1;
   ProductVo vo = 4;
 }
 
@@ -230,7 +230,7 @@ message ProductActionVo {
 
 message ProductActionReq { ProductActionVo vo = 1; }
 message ProductActionListReq {
-  common.Page page = 1;
+  Page page = 1;
   ProductActionVo vo = 2;
 }
 message ProductActionListRes {
@@ -245,7 +245,7 @@ message AreaParamVo {
   string name = 3;
   string areas = 4;
   string paramValue = 5;
-  common.Status status = 6;
+  Status status = 6;
   int64 sort = 7;
   string remark = 8;
   int64 createTime = 9;
@@ -254,7 +254,7 @@ message AreaParamVo {
 }
 
 message AreaParamListReq {
-  common.Page page = 1;
+  Page page = 1;
   AreaParamVo vo = 2;
 }
 
@@ -281,7 +281,7 @@ message DictVo {
 message DictGetReq { DictVo vo = 1; }
 
 message DictListReq {
-  common.Page page = 1;
+  Page page = 1;
   DictVo vo = 2;
 }
 
@@ -298,13 +298,13 @@ message NationalLanguageVo {
   string tbFieldName = 4;
   string lan = 5;
   string value = 6;
-  common.Status status = 7;
+  Status status = 7;
   int64 updateTime = 8;
   int64 createTime = 9;
 }
 
 message NationalLanguageListReq {
-  common.Page page = 1;
+  Page page = 1;
   NationalLanguageVo vo = 2;
 }
 
@@ -330,7 +330,7 @@ message TipVo {
 }
 
 message TipListReq {
-  common.Page page = 1;
+  Page page = 1;
   TipVo vo = 2;
 }
 
@@ -355,7 +355,7 @@ message UpgradePkgPlanVo {
   string productCode = 2; // 产品code
   string areas = 3;       // 地区列表
   int64 sort = 4;
-  common.Status status = 5; // 状态
+  Status status = 5; // 状态
   string remark = 6;
   int64 createTime = 7;
   int64 updateTime = 8;
@@ -376,14 +376,14 @@ message UpgradePkgPlanDetailVo {
   string testUpgradePolicyConfig = 12;  // 测试更新策略配置
   string upgradePolicyConfig = 13;      // 更新策略配置
   string forceUpgradePolicyConfig = 14; // 强制更新策略
-  common.Status status = 15;                   // 状态
+  Status status = 15;                   // 状态
   string remark = 16;
   int64 createTime = 17;
   int64 updateTime = 18;
 }
 
 message UpgradePkgPlanListReq {
-  common.Page page = 1;
+  Page page = 1;
   UpgradePkgPlanVo vo = 2;
 }
 
@@ -393,7 +393,7 @@ message UpgradePkgPlanListResp {
 }
 
 message UpgradePkgPlanDetailListReq {
-  common.Page page = 1;
+  Page page = 1;
   UpgradePkgPlanDetailVo vo = 2;
   repeated int64 planIds = 3;
 }
@@ -408,7 +408,7 @@ message UpgradeResPlanVo {
   string productCode = 2; // 产品code
   string areas = 3;       // 地区列表
   int64 sort = 4;
-  common.Status status = 5; // 状态
+  Status status = 5; // 状态
   string remark = 6;
   int64 createTime = 7;
   int64 updateTime = 8;
@@ -428,14 +428,14 @@ message UpgradeResPlanDetailVo {
   int64 runtimeVersionCode = 11; // 资源版本号
   string appVersionName = 12;    // app 版本名称
   int64 appVersionCode = 13;     // app 版本号
-  common.Status status = 14;            // 状态,1=正常,2=冻结
+  Status status = 14;            // 状态,1=正常,2=冻结
   string remark = 15;            // 备注
   int64 createTime = 16;         // 创建时间秒
   int64 updateTime = 17;         // 修改时间秒
 }
 
 message UpgradeResPlanListReq {
-  common.Page page = 1;
+  Page page = 1;
   UpgradeResPlanVo vo = 2;
 }
 
@@ -445,7 +445,7 @@ message UpgradeResPlanListResp {
 }
 
 message UpgradeResPlanDetailListReq {
-  common.Page page = 1;
+  Page page = 1;
   UpgradeResPlanDetailVo vo = 2;
   repeated int64 planIds = 3;
 }
@@ -457,48 +457,48 @@ message UpgradeResPlanDetailListResp {
 
 // 基础服务： 产品管理，产品配置，升级配置、更新资源管理，资源版本管理，全局配置
 service GoPmpClient {
-  rpc Ping(common.Request) returns (common.Response);
+  rpc Ping(Request) returns (Response);
 
   // GlobalParamVo
   rpc GlobalParamAdd(GlobalParamVo) returns (GlobalParamVo);
   rpc GlobalParamUpdate(GlobalParamVo) returns (GlobalParamVo);
-  rpc GlobalParamDel(common.Ids) returns (common.Empty);
+  rpc GlobalParamDel(Ids) returns (Empty);
   rpc GlobalParamGet(GlobalParamVo) returns (GlobalParamVo);
   rpc GlobalParamList(GlobalParamListReq) returns (GlobalParamListResp);
 
   // ProductVo
   rpc ProductAdd(ProductVo) returns (ProductVo);
-  rpc ProductUpdate(ProductVo) returns (common.Empty);
-  rpc ProductDel(common.Ids) returns (common.Empty);
+  rpc ProductUpdate(ProductVo) returns (Empty);
+  rpc ProductDel(Ids) returns (Empty);
   rpc ProductGet(ProductVo) returns (ProductVo);
   rpc ProductList(ProductListReq) returns (ProductListResp);
-  rpc ProductAll(common.Request) returns (ProductListResp);
+  rpc ProductAll(Request) returns (ProductListResp);
 
   // ProductParamVo
   // rpc ProductParamAdd(ProductParamVo) returns (ProductParamVo);
-  rpc ProductParamUpdate(ProductParamVo) returns (common.Empty);
-  // rpc ProductParamDel(Ids) returns (common.Empty);
+  rpc ProductParamUpdate(ProductParamVo) returns (Empty);
+  // rpc ProductParamDel(Ids) returns (Empty);
   rpc ProductParamGet(ProductParamVo) returns (ProductParamVo);
   rpc ProductParamList(ProductParamListReq) returns (ProductParamListResp);
 
   // ProductAction 产品行为配置
   rpc ProductActionAdd(ProductActionVo) returns (ProductActionVo);
-  rpc ProductActionUpdate(ProductActionVo) returns (common.Empty);
-  rpc ProductActionDel(common.Ids) returns (common.Empty);
+  rpc ProductActionUpdate(ProductActionVo) returns (Empty);
+  rpc ProductActionDel(Ids) returns (Empty);
   rpc ProductActionGet(ProductActionReq) returns (ProductActionVo);
   rpc ProductActionList(ProductActionListReq) returns (ProductActionListRes);
 
   // AreaParamVo
   rpc AreaParamAdd(AreaParamVo) returns (AreaParamVo);
   rpc AreaParamUpdate(AreaParamVo) returns (AreaParamVo);
-  rpc AreaParamDel(common.Ids) returns (common.Empty);
+  rpc AreaParamDel(Ids) returns (Empty);
   rpc AreaParamGet(AreaParamVo) returns (AreaParamVo);
   rpc AreaParamList(AreaParamListReq) returns (AreaParamListResp);
 
   // NationalLanguage
   rpc NationalLanguageAdd(NationalLanguageVo) returns (NationalLanguageVo);
   rpc NationalLanguageUpdate(NationalLanguageVo) returns (NationalLanguageVo);
-  rpc NationalLanguageDel(common.Ids) returns (common.Empty);
+  rpc NationalLanguageDel(Ids) returns (Empty);
   rpc NationalLanguageGet(NationalLanguageVo) returns (NationalLanguageVo);
   rpc NationalLanguageList(NationalLanguageListReq)
       returns (NationalLanguageListResp);
@@ -506,42 +506,42 @@ service GoPmpClient {
   // Tip
   rpc TipAdd(TipVo) returns (TipVo);
   rpc TipUpdate(TipVo) returns (TipVo);
-  rpc TipDel(TipDelReq) returns (common.Empty);
+  rpc TipDel(TipDelReq) returns (Empty);
   rpc TipGet(TipVo) returns (TipVo);
   rpc TipList(TipListReq) returns (TipListResp);
 
   // UpgradeRes 热更新代码资源管理
   rpc UpgradeResAdd(UpgradeResVo) returns (UpgradeResVo);
-  rpc UpgradeResUpdate(UpgradeResVo) returns (common.Empty);
-  rpc UpgradeResDel(ResourceDelReq) returns (common.Empty);
+  rpc UpgradeResUpdate(UpgradeResVo) returns (Empty);
+  rpc UpgradeResDel(ResourceDelReq) returns (Empty);
   rpc UpgradeResGet(UpgradeResGetReq) returns (UpgradeResVo);
   rpc UpgradeResList(UpgradeResListReq) returns (UpgradeResListResp);
 
   // UpgradePkg app 包更新管理
   rpc UpgradePkgAdd(UpgradePkgVo) returns (UpgradePkgVo);
-  rpc UpgradePkgUpdate(UpgradePkgVo) returns (common.Empty);
-  rpc UpgradePkgDel(common.Ids) returns (common.Empty);
+  rpc UpgradePkgUpdate(UpgradePkgVo) returns (Empty);
+  rpc UpgradePkgDel(Ids) returns (Empty);
   rpc UpgradePkgGet(UpgradePkgGetReq) returns (UpgradePkgVo);
   rpc UpgradePkgList(UpgradePkgListReq) returns (UpgradePkgListResp);
 
   // UpgradeResConfig 热更新【代码资源】配置管理，控制哪些版本地区的用户可以更新
   rpc UpgradeResConfigAdd(UpgradeResConfigVo) returns (UpgradeResConfigVo);
-  rpc UpgradeResConfigUpdate(UpgradeResConfigVo) returns (common.Empty);
-  rpc UpgradeResConfigDel(common.Ids) returns (common.Empty);
+  rpc UpgradeResConfigUpdate(UpgradeResConfigVo) returns (Empty);
+  rpc UpgradeResConfigDel(Ids) returns (Empty);
   rpc UpgradeResConfigGet(UpgradeResConfigGetReq) returns (UpgradeResConfigVo);
   rpc UpgradeResConfigList(UpgradeResConfigListReq)
       returns (UpgradeResConfigListResp);
 
   rpc DictAdd(DictVo) returns (DictVo);
-  rpc DictUpdate(DictVo) returns (common.Empty);
-  rpc DictDel(common.Ids) returns (common.Empty);
+  rpc DictUpdate(DictVo) returns (Empty);
+  rpc DictDel(Ids) returns (Empty);
   rpc DictGet(DictGetReq) returns (DictVo);
   rpc DictList(DictListReq) returns (DictListResp);
 
   // UpgradePkgPlan
   rpc UpgradePkgPlanAdd(UpgradePkgPlanVo) returns (UpgradePkgPlanVo);
-  rpc UpgradePkgPlanUpdate(UpgradePkgPlanVo) returns (common.Empty);
-  rpc UpgradePkgPlanDel(common.Ids) returns (common.Empty);
+  rpc UpgradePkgPlanUpdate(UpgradePkgPlanVo) returns (Empty);
+  rpc UpgradePkgPlanDel(Ids) returns (Empty);
   rpc UpgradePkgPlanGet(UpgradePkgPlanVo) returns (UpgradePkgPlanVo);
   rpc UpgradePkgPlanList(UpgradePkgPlanListReq)
       returns (UpgradePkgPlanListResp);
@@ -549,8 +549,8 @@ service GoPmpClient {
   // UpgradePkgPlanDetail
   rpc UpgradePkgPlanDetailAdd(UpgradePkgPlanDetailVo)
       returns (UpgradePkgPlanDetailVo);
-  rpc UpgradePkgPlanDetailUpdate(UpgradePkgPlanDetailVo) returns (common.Empty);
-  rpc UpgradePkgPlanDetailDel(common.Ids) returns (common.Empty);
+  rpc UpgradePkgPlanDetailUpdate(UpgradePkgPlanDetailVo) returns (Empty);
+  rpc UpgradePkgPlanDetailDel(Ids) returns (Empty);
   rpc UpgradePkgPlanDetailGet(UpgradePkgPlanDetailVo)
       returns (UpgradePkgPlanDetailVo);
   rpc UpgradePkgPlanDetailList(UpgradePkgPlanDetailListReq)
@@ -558,8 +558,8 @@ service GoPmpClient {
 
   // UpgradeResPlan
   rpc UpgradeResPlanAdd(UpgradeResPlanVo) returns (UpgradeResPlanVo);
-  rpc UpgradeResPlanUpdate(UpgradeResPlanVo) returns (common.Empty);
-  rpc UpgradeResPlanDel(common.Ids) returns (common.Empty);
+  rpc UpgradeResPlanUpdate(UpgradeResPlanVo) returns (Empty);
+  rpc UpgradeResPlanDel(Ids) returns (Empty);
   rpc UpgradeResPlanGet(UpgradeResPlanVo) returns (UpgradeResPlanVo);
   rpc UpgradeResPlanList(UpgradeResPlanListReq)
       returns (UpgradeResPlanListResp);
@@ -567,8 +567,8 @@ service GoPmpClient {
   // UpgradeResPlanDetail
   rpc UpgradeResPlanDetailAdd(UpgradeResPlanDetailVo)
       returns (UpgradeResPlanDetailVo);
-  rpc UpgradeResPlanDetailUpdate(UpgradeResPlanDetailVo) returns (common.Empty);
-  rpc UpgradeResPlanDetailDel(common.Ids) returns (common.Empty);
+  rpc UpgradeResPlanDetailUpdate(UpgradeResPlanDetailVo) returns (Empty);
+  rpc UpgradeResPlanDetailDel(Ids) returns (Empty);
   rpc UpgradeResPlanDetailGet(UpgradeResPlanDetailVo)
       returns (UpgradeResPlanDetailVo);
   rpc UpgradeResPlanDetailList(UpgradeResPlanDetailListReq)

@@ -1,8 +1,7 @@
 syntax = "proto3";
 
-package common;
-option go_package = "github.com/a135422996/go-service-pb/gozero_gen/common"; // 与你的模块名匹配
-
+package gorpc;
+option go_package = "github.com/a135422996/go-service-pb/client;gorpc";
 
 // 根据需要增加状态
 enum CommonResultCode {
