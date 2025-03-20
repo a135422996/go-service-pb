@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package sys;
+option go_package = "git.livesys.org/go-service/go-service-pb/gozero_gen/sys";
+// 根据需要增加状态
+
+import "common.proto";
+
+// 后续扩展
+// pmp 模块：
+// 登录
+// 角色管理(sys_role)
+// 用户管理(sys_user)
+// 菜单管理(sys_menu-CRUD(5个权限))
+// 字典管理(sys_dict)，组织管理(sys_dep)
+// 岗位管理(sys_post)
+service GoSysClient {
+  rpc Ping(common.Request) returns (common.Response);
+  //登录
+  rpc Login(common.BaseReq) returns (common.Response);
+}

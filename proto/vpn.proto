@@ -1,0 +1,237 @@
+syntax = "proto3";
+
+package vpn;
+option go_package = "git.livesys.org/go-service/go-service-pb/gozero_gen/vpn";
+
+import "common.proto";
+
+// VpnTag 相关消息定义
+message VpnTagVo {
+  int64 id = 1;
+  string productCode = 2;
+  string type = 3;
+  string name = 4;
+  int64 sort = 5;
+  common.Status status = 6;
+  string remark = 7;
+  int64 createTime = 8;
+  int64 updateTime = 9;
+}
+
+message VpnTagGetReq { VpnTagVo vo = 1; }
+
+message VpnTagListReq {
+  common.Page page = 1;
+  VpnTagVo vo = 2;
+}
+
+message VpnTagListResp {
+  int64 total = 1;
+  repeated VpnTagVo list = 2;
+}
+
+message VpnGroupVo {
+  int64 id = 1;
+  string productCode = 2;
+  string name = 3;
+  string icon = 4;
+  int64 sort = 5;
+  common.Status status = 6;
+  string remark = 7;
+  int64 createTime = 8;
+  int64 updateTime = 9;
+  string version = 10;
+}
+message VpnGroupAddReq {
+  VpnGroupVo vo = 1;
+  repeated int64 tagIds = 2;
+}
+message VpnGroupGetReq { VpnGroupVo vo = 1; }
+message VpnGroupListReq {
+  common.Page page = 1;
+  VpnGroupVo vo = 2;
+}
+message VpnGroupListResp {
+  int64 total = 1;
+  repeated VpnGroupVo list = 2;
+}
+
+message VpnGroupTagVo {
+  int64 id = 1;
+  int64 groupId = 2;
+  int64 tagId = 3;
+  int64 createTime = 4;
+  int64 updateTime = 5;
+}
+
+message VpnGroupTagListReq {
+  common.Page page = 1;
+  VpnGroupTagVo vo = 2;
+  repeated int64 groupIds = 3;
+  repeated int64 tagIds = 4;
+}
+
+message VpnGroupTagListResp {
+  int64 total = 1;
+  repeated VpnGroupTagVo list = 2;
+}
+
+message VpnLocationVo {
+  int64 id = 1;
+  int64 groupId = 2;
+  string name = 3;
+  string code = 4;
+  string icon = 5;
+  int64 type = 6;
+  string displayPolicyConfig = 7;
+  string routePolicyConfig = 8;
+  int64 sort = 9;
+  common.Status status = 10;
+  string remark = 11;
+  int64 createTime = 12;
+  int64 updateTime = 13;
+  string version = 14;
+}
+
+message VpnLocationExVo {
+  VpnLocationVo vo = 1;
+  string productCode = 2;
+}
+
+message VpnLocationGetReq { VpnLocationVo vo = 1; }
+message VpnLocationListReq {
+  common.Page page = 1;
+  VpnLocationExVo vo = 2;
+  repeated int64 groupIds = 3;
+}
+message VpnLocationListResp {
+  int64 total = 1;
+  repeated VpnLocationExVo list = 2;
+}
+
+message VpnServerVo {
+  int64 id = 1;
+  int64 instanceId = 2;
+  string name = 3;
+  string ip = 4;
+  int64 port = 5;
+  int64 pingPort = 6;
+  string netConfig = 7;
+  string routePolicyConfig = 8;
+  string serverInfo = 9;
+  common.Status status = 10;
+  string remark = 11;
+  int64 createTime = 12;
+  int64 updateTime = 13;
+  string version = 14;
+}
+
+message VpnServerListReq {
+  common.Page page = 1;
+  VpnServerVo vo = 2;
+  string productCode = 3;
+  // repeated int64 serverIds = 4; //只有统计使用,findList没有用到
+  // repeated int64 locationIds = 5; //只有统计使用,findList没有用到
+}
+
+message VpnServerListResp {
+  int64 total = 1;
+  repeated VpnServerVo list = 2;
+}
+
+message VpnServerAddReq {
+  VpnServerVo vo = 1;
+  repeated int64 locationIds = 2;
+}
+
+message VpnServerLocationVo {
+  int64 id = 1;
+  int64 serverId = 2;
+  int64 locationId = 3;
+  int64 createTime = 4;
+  int64 updateTime = 5;
+  common.Status status = 6;
+}
+
+message VpnServerLocationListReq {
+  common.Page page = 1;
+  VpnServerLocationVo vo = 2;
+  repeated int64 serverIds = 3;
+  repeated int64 locationIds = 4;
+}
+
+message VpnServerLocationListResp {
+  int64 total = 1;
+  repeated VpnServerLocationVo list = 2;
+}
+
+message VpnLocationServerCountVo {
+  int64 locationId = 1;
+  int64 serverCount = 2;
+}
+
+message VpnLocationServerCountReq {
+  common.Page page = 1;
+  common.Status status = 2;
+  repeated int64 serverIds = 3;
+  repeated int64 locationIds = 4;
+}
+
+message VpnLocationServerCountResp {
+  int64 total = 1;
+  repeated VpnLocationServerCountVo list = 2;
+}
+
+// govpn 模块，VPN相关服务
+service GoVpnClient {
+  rpc Ping(common.Request) returns (common.Response);
+  // 表的事务操作
+  rpc Transaction(common.TransactionReq) returns (common.Empty);
+
+  // VpnTag
+  rpc VpnTagAdd(VpnTagVo) returns (VpnTagVo);
+  rpc VpnTagUpdate(VpnTagVo) returns (common.Empty);
+  rpc VpnTagDel(common.Ids) returns (common.Empty);
+  rpc VpnTagGet(VpnTagGetReq) returns (VpnTagVo);
+  rpc VpnTagList(VpnTagListReq) returns (VpnTagListResp);
+
+  // VpnGroup
+  rpc VpnGroupAdd(VpnGroupAddReq) returns (VpnGroupVo);
+  rpc VpnGroupUpdate(VpnGroupAddReq) returns (common.Empty);
+  rpc VpnGroupDel(common.Ids) returns (common.Empty);
+  // rpc VpnGroupGet(VpnGroupGetReq) returns (VpnGroupVo);
+  rpc VpnGroupList(VpnGroupListReq) returns (VpnGroupListResp);
+
+  // VpnGroupTag
+  rpc VpnGroupTagAdd(VpnGroupTagVo) returns (VpnGroupTagVo);
+  rpc VpnGroupTagUpdate(VpnGroupTagVo) returns (common.Empty);
+  rpc VpnGroupTagDel(common.Ids) returns (common.Empty);
+  rpc VpnGroupTagGet(VpnGroupTagVo) returns (VpnGroupTagVo);
+  rpc VpnGroupTagList(VpnGroupTagListReq) returns (VpnGroupTagListResp);
+
+  // VpnLocation
+  rpc VpnLocationAdd(VpnLocationVo) returns (VpnLocationVo);
+  rpc VpnLocationUpdate(VpnLocationVo) returns (common.Empty);
+  rpc VpnLocationDel(common.Ids) returns (common.Empty);
+  rpc VpnLocationGet(VpnLocationGetReq) returns (VpnLocationVo);
+  rpc VpnLocationList(VpnLocationListReq) returns (VpnLocationListResp);
+
+  // VpnServer
+  rpc VpnServerAdd(VpnServerAddReq) returns (VpnServerVo);
+  rpc VpnServerUpdate(VpnServerAddReq) returns (common.Empty);
+  rpc VpnServerDel(common.Ids) returns (common.Empty);
+  rpc VpnServerGet(VpnServerVo) returns (VpnServerVo);
+  rpc VpnServerList(VpnServerListReq) returns (VpnServerListResp);
+
+  // VpnServerLocation
+  rpc VpnServerLocationAdd(VpnServerLocationVo) returns (VpnServerLocationVo);
+  rpc VpnServerLocationUpdate(VpnServerLocationVo) returns (common.Empty);
+  rpc VpnServerLocationDel(common.Ids) returns (common.Empty);
+  rpc VpnServerLocationGet(VpnServerLocationVo) returns (VpnServerLocationVo);
+  rpc VpnServerLocationList(VpnServerLocationListReq)
+      returns (VpnServerLocationListResp);
+
+  // VpnLocationServerCount
+  rpc VpnLocationServerCount(VpnLocationServerCountReq)
+      returns (VpnLocationServerCountResp);
+}

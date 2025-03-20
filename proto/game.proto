@@ -1,0 +1,92 @@
+syntax = "proto3";
+package game;
+
+option go_package = "git.livesys.org/go-service/go-service-pb/gozero_gen/game";
+
+import "common.proto";
+
+message GameVo {
+  int64 id = 1;
+  string name = 2;
+  string pkg = 3;
+  string icon = 4;
+  int64 status = 5;
+  int64 createTime = 6;
+  int64 updateTime = 7;
+}
+
+message GameReq { GameVo vo = 1; }
+message GameListReq {
+  common.Page page = 1;
+  repeated string pkgs = 2;
+  GameVo vo = 3;
+}
+message GameListRes {
+  int64 total = 1;
+  repeated GameVo list = 2;
+}
+
+message RelGameRankVo {
+  int64 id = 1;
+  int64 gameId = 2;
+  int64 rankId = 3;
+  int64 weight = 4;
+  int64 createTime = 5;
+  int64 updateTime = 6;
+}
+
+message RelGameRankReq { RelGameRankVo vo = 1; }
+message RelGameRankListReq {
+  common.Page page = 1;
+  RelGameRankVo vo = 2;
+}
+message RelGameRankListRes {
+  int64 total = 1;
+  repeated RelGameRankVo list = 2;
+}
+
+message RelGameVpnGroupVo {
+  int64 id = 1;
+  int64 gameId = 2;
+  string productCode = 3;
+  int64 vpnGroupId = 4;
+  int64 status = 5;
+  int64 createTime = 6;
+  int64 updateTime = 7;
+}
+
+message RelGameVpnGroupReq { RelGameVpnGroupVo vo = 1; }
+message RelGameVpnGroupListReq {
+  common.Page page = 1;
+  repeated int64 gameIds = 2;
+  RelGameVpnGroupVo vo = 3;
+}
+message RelGameVpnGroupListRes {
+  int64 total = 1;
+  repeated RelGameVpnGroupVo list = 2;
+}
+
+service GoGameClient {
+  // 加速器游戏管理
+  rpc GameAdd(GameVo) returns (GameVo);
+  rpc GameUpdate(GameVo) returns (common.Empty);
+  rpc GameDel(common.Ids) returns (common.Empty);
+  rpc GameGet(GameReq) returns (GameVo);
+  rpc GameList(GameListReq) returns (GameListRes);
+  rpc GameAll(common.Request) returns (GameListRes);
+
+  // 游戏榜单关联关系
+  rpc RelGameRankAdd(RelGameRankVo) returns (RelGameRankVo);
+  rpc RelGameRankUpdate(RelGameRankVo) returns (common.Empty);
+  rpc RelGameRankDel(common.Ids) returns (common.Empty);
+  rpc RelGameRankGet(RelGameRankReq) returns (RelGameRankVo);
+  rpc RelGameRankList(RelGameRankListReq) returns (RelGameRankListRes);
+
+  // 游戏地域关联关系
+  rpc RelGameVpnGroupAdd(RelGameVpnGroupVo) returns (RelGameVpnGroupVo);
+  rpc RelGameVpnGroupUpdate(RelGameVpnGroupVo) returns (common.Empty);
+  rpc RelGameVpnGroupDel(common.Ids) returns (common.Empty);
+  rpc RelGameVpnGroupGet(RelGameVpnGroupReq) returns (RelGameVpnGroupVo);
+  rpc RelGameVpnGroupList(RelGameVpnGroupListReq)
+      returns (RelGameVpnGroupListRes);
+}

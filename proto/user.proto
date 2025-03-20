@@ -1,0 +1,161 @@
+syntax = "proto3";
+
+package user;
+option go_package = "git.livesys.org/go-service/go-service-pb/gozero_gen/user";
+
+import "common.proto";
+
+// Account
+message AccountVo {
+  int64 id = 1;
+  string userUuid = 2;        // 用户UUID
+  string productCode = 3;     // 产品ID
+  string username = 4;        // 用户名
+  string password = 5;        // 密码
+  string accountKey = 6;      // 账号KEY
+  string accountPassword = 7; // 账号密码
+  common.BoolInt whitelistUser = 8;  // 白名单用户
+  string area = 9;            // 指定地区
+  int64 accountType = 10;     // 账号类型
+  int64 registMode = 11;      // 注册方式
+  common.BoolInt activated = 12;     // 是否激活
+  string config = 13;         // 配置
+  common.Status status = 14;         // 状态
+  string remark = 15;         // 备注
+  string deviceId = 16;       // 设备ID
+  string platform = 17;       // 平台
+  string channel = 18;        // 渠道
+  string deviceModel = 19;    // 设备型号
+  string deviceOs = 20;       // 设备系统
+  int64 timezone = 21;        // 时区
+  string lang = 22;           // 语言
+  int64 appVer = 23;          // 产品版本号
+  string ip = 24;
+  string country = 25;  // 国家
+  string province = 26; // 省份
+  string city = 27;     // 城市
+  string isp = 28;      // ISP
+  int64 createTime = 29;
+  int64 updateTime = 30;
+  string version = 31;          // 数据版本
+  string sessionId = 32;        // 登录凭证
+  int64 sessionCreateTime = 33; // 凭证创建时间
+}
+
+message AccountListReq {
+  common.Page page = 1;
+  AccountVo vo = 2;
+}
+
+message AccountListResp {
+  int64 total = 1;
+  repeated AccountVo list = 2;
+}
+
+// AccountDevice
+message AccountDeviceVo {
+  int64 id = 1;
+  int64 accountId = 2;         // 用户ID
+  int64 deviceId = 3;          // 设备ID
+  string sessionId = 4;        // 登录凭证
+  int64 sessionCreateTime = 5; // 凭证创建时间
+  int64 updateTime = 6;
+  int64 createTime = 7;
+}
+
+message AccountDeviceListReq {
+  common.Page page = 1;
+  AccountDeviceVo vo = 2;
+}
+
+message AccountDeviceListResp {
+  int64 total = 1;
+  repeated AccountDeviceVo list = 2;
+}
+
+message DeviceVo {
+  int64 id = 1;
+  string productCode = 2;
+  string deviceId = 3;
+  string accountKey = 4;
+  string accountPassword = 5;
+  string platform = 6;
+  string channel = 7;
+  string deviceModel = 8;
+  string deviceOs = 9;
+  int64 timezone = 10;
+  string lang = 11;
+  int64 appVer = 12;
+  string ip = 13;
+  string country = 14;
+  string province = 15;
+  string city = 16;
+  string isp = 17;
+  int64 createTime = 18;
+  int64 updateTime = 19;
+  int64 status = 20;
+  string refer = 21;
+}
+
+message DeviceListReq {
+  common.Page page = 1;
+  DeviceVo vo = 2;
+}
+message DeviceListRes {
+  int64 total = 1;
+  repeated DeviceVo list = 2;
+}
+
+message UserAppConfigVo {
+  int64 id = 1;
+  string deviceId = 2;
+  string key = 3;
+  string value = 4;
+  common.Status status = 5;
+  int64 createTime = 6;
+  int64 updateTime = 7;
+}
+message UserAppConfigGetReq { UserAppConfigVo vo = 1; }
+message UserAppConfigListReq {
+  common.Page page = 1;
+  UserAppConfigVo vo = 2;
+}
+message UserAppConfigListRes {
+  int64 total = 1;
+  repeated UserAppConfigVo list = 2;
+}
+
+// 用户模块
+service GoUserClient {
+  rpc Ping(common.Request) returns (common.Response);
+  // 登录
+  rpc Login(common.BaseReq) returns (common.Response);
+
+  // 用户app配置管理（ring）
+  rpc UserAppConfigAdd(UserAppConfigVo) returns (UserAppConfigVo);
+  rpc UserAppConfigUpdate(UserAppConfigVo) returns (UserAppConfigVo);
+  rpc UserAppConfigDel(common.Ids) returns (common.Empty);
+  rpc UserAppConfigGet(UserAppConfigGetReq) returns (UserAppConfigVo);
+  rpc UserAppConfigList(UserAppConfigListReq) returns (UserAppConfigListRes);
+
+  // 设备管理
+  rpc DeviceAdd(DeviceVo) returns (DeviceVo);
+  rpc DeviceUpdate(DeviceVo) returns (DeviceVo);
+  rpc DeviceDel(common.Ids) returns (common.Empty);
+  rpc DeviceGet(DeviceVo) returns (DeviceVo);
+  rpc DeviceList(DeviceListReq) returns (DeviceListRes);
+
+  // Account
+  rpc AccountAdd(AccountVo) returns (AccountVo);
+  rpc AccountUpdate(AccountVo) returns (AccountVo);
+  rpc AccountDel(common.Ids) returns (common.Empty);
+  rpc AccountGet(AccountVo) returns (AccountVo);
+  rpc AccountList(AccountListReq) returns (AccountListResp);
+
+  // AccountDevice
+  rpc AccountDeviceAdd(AccountDeviceVo) returns (AccountDeviceVo);
+  rpc AccountDeviceUpdate(AccountDeviceVo) returns (AccountDeviceVo);
+  rpc AccountDeviceDel(common.Ids) returns (common.Empty);
+  rpc AccountDeviceGet(AccountDeviceVo) returns (AccountDeviceVo);
+  rpc AccountDeviceList(AccountDeviceListReq) returns (AccountDeviceListResp);
+}

@@ -1,0 +1,84 @@
+syntax = "proto3";
+
+package common;
+option go_package = "git.livesys.org/go-service/go-service-pb/gozero_gen/common"; // 与你的模块名匹配
+
+
+// 根据需要增加状态
+enum CommonResultCode {
+  Success = 0;
+}
+
+enum Status {
+  UnknownStatus = 0;
+  StatusValid = 1;
+  StatusInValid = 2;
+}
+
+enum BoolInt {
+  BoolIntUnknown = 0;
+  BoolIntTrue = 1;
+  BoolIntFalse = 2;
+}
+
+message Empty {}
+
+message Int64SelectController {
+  repeated int64 values = 1;
+  bool exclude = 2;
+}
+
+message IntSelectController {
+  repeated int32 values = 1;
+  bool exclude = 2;
+}
+
+message StringSelectController {
+  repeated string values = 1;
+  bool exclude = 2;
+}
+
+message Page {
+  message OrderItem {
+    string column = 1;
+    bool asc = 2;
+  }
+
+  int64 pageNo = 1;
+  int64 pageSize = 2;
+  int64 startTime = 3;
+  int64 endTime = 4;
+  repeated OrderItem sortBy = 5;
+
+  bool ignoreTotal = 6; // 忽略总条数
+
+  bool ignoreStat = 7; // 忽略总条数
+  bool ignoreList = 8; // 忽略列表
+  repeated int64 ids = 9;
+  repeated string groupBy = 10;
+}
+
+message CommonResult {
+  CommonResultCode code = 1;
+  string msg = 2;
+}
+
+message BaseReq {
+  int64 timeZoneOffset = 1;
+  string lan = 2;
+}
+
+message DeleteIdResp { repeated int64 failedIds = 1; }
+message Ids { repeated int64 ids = 1; }
+
+message Request {}
+
+message Response { string msg = 1; }
+
+message TransactionOperation {
+  string table = 1;   // 表名
+  string operate = 2; // delete,insert,update
+  string data = 3;    // json格式
+}
+
+message TransactionReq { repeated TransactionOperation transactions = 1; }
