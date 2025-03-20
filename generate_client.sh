@@ -3,7 +3,7 @@ set -euo pipefail
 
 cd "$(dirname "$0")" || exit 1
 
-MODULE="git.livesys.org/go-service/go-service-pb/gozero_gen"
+MODULE="github.com/a135422996/go-service-pb/gozero_gen"
 PROTO_DIR="./proto"
 OUTPUT_DIR="./gozero_gen"
 

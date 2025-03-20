@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package user;
-option go_package = "git.livesys.org/go-service/go-service-pb/gozero_gen/user";
+option go_package = "github.com/a135422996/go-service-pb/gozero_gen/user";
 
 import "common.proto";
 
